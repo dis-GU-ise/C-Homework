@@ -1,0 +1,58 @@
+#include<iostream>
+#include<string>
+#include<stdlib.h>
+#include<time.h>
+using namespace std;
+class Stu {
+public:
+	Stu(int x) { N = x;p = new int[N];q = new string[N];n = new int[N];count = 0; }
+	void initialize();
+	void pick();
+                ~Stu() {
+		delete []p;
+		delete []q;
+		delete []n;
+	            }
+private:
+	int N;
+	int* p;
+	string* q;
+	int count;
+	int* n;
+};
+void Stu::initialize()
+{
+	int j = 0;
+	for (int i = 0;i < N;i++)
+	{
+		cin >> *(q+i) >> *(p+i);
+		if (*(p + i) >= 80)
+		{
+			count++;
+			*(n+j) = i;
+			j++;
+			
+		}
+	}
+	cout << "done" << endl;
+}
+void Stu::pick()
+{
+	if (count < 2)
+	{
+		cout << "error";
+		return;
+	}
+	int t = rand() % count;
+	cout <<"ID:" << *(q + *(n + t)) << "score:" << *(p + *(n + t));
+}
+int main()
+{
+	int n;
+	cin >> n;
+	srand(time(0));
+	Stu stu(n);
+	stu.initialize();
+	stu.pick();
+	return 0;
+}

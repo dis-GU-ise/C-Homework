@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	string s;
+	cin >> s;
+	int p = 0, len=0;
+	for (int i = 0;i < s.length();i++)
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			p = i;
+			break;
+		}
+	}
+	for (int i = p;i < s.length();i++)
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			++len;
+		}
+	}
+	string ans = s.substr(p, len);
+	len = ans.length();
+	while (1)
+	{
+		if (ans[len - 3] < '9')
+		{
+			ans[len - 3] += 1;
+			break;
+		}
+		else
+		{
+			ans[len-- - 3] = '0';
+		}
+		if (len - 3 == -1)
+		{
+			ans.insert(0, "1");
+			break;
+		}
+	}
+	cout << ans;
+}

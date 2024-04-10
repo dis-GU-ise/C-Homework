@@ -1,0 +1,58 @@
+#include<iostream>
+using namespace std;
+class Person
+{
+public:
+	Person(int x) { n1 = x; }
+	Person(){}
+	
+protected:
+	int n1;
+};
+class Money:public Person
+{
+public:
+	Money(int x,int y) :Person(x) 
+	{
+		n2 = y;
+		sum = n1 * n2;
+	}
+	Money(const Money& a)
+	{
+		n1 = a.n1;
+		n2 = a.n2;
+		sum = a.sum;
+	}
+	friend ostream& operator<<(ostream& out,const Money& m)
+	{
+		out << "人数" << m.n1 << "奖金平均数" << m.n2;
+		return out;
+	}
+	bool operator>(Money& b)
+	{
+		return this->sum > b.sum;
+	};
+private:
+	int n2;
+	int sum;
+};
+int main()
+{
+	int num1, num2, per1, per2;
+	cout << "输入人数和平均奖金数" << endl;
+	cin >> num1 >> per1 >> num2 >> per2;
+	Money a(num1,per1);
+	Money b(num2,per2);
+	if (a > b)
+	{
+		cout <<"奖金总数更多的是"<<a<<endl;
+	}
+	else if (b > a)
+	{
+		cout << "奖金总数更多的是" << b<<endl;
+	}
+	else
+	{
+		cout << "一样多" << endl;
+	}
+}
